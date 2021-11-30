@@ -659,7 +659,12 @@ export default {
         if (this.authenticated()) {
             return oauth.xhr({ method: 'GET', path: path }, done);
         } else {
-            var url = urlroot + path;
+            var url;
+            if (path.startsWith('/api/0.6/map.json?bbox=')) {
+                url = 'http://localhost:3000' + path;
+            } else {
+                url = urlroot + path;
+            }
             var controller = new AbortController();
             var fn;
             if (path.indexOf('.json') !== -1) {
