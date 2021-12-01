@@ -349,7 +349,7 @@ export function uiInit(context) {
         ui.hash = behaviorHash(context);
         ui.hash();
         if (!ui.hash.hadHash) {
-            map.centerZoom([0, 0], 2);
+            map.centerZoom([7.13004, 50.71550], 19); // Post Tower, Bonn zoom coords
         }
 
         // Bind events
