@@ -14,7 +14,7 @@ import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler,
 
 var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
-var urlroot = 'http://ec2-52-59-235-27.eu-central-1.compute.amazonaws.com:3000';
+var urlroot = 'http://ec2-18-193-73-121.eu-central-1.compute.amazonaws.com:3000';
 var oauth = osmAuth({
     url: urlroot,
     oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
