@@ -142,6 +142,12 @@ function sortKeys(a, b) {
 var debouncedRequest = _debounce(request, 300, { leading: false });
 
 function request(url, params, exactMatch, callback, loaded) {
+    var path = '/api/4/key/values';
+    console.log(url);
+    if (url.includes(path)) {
+        url = 'http://localhost:3100' + path;
+    }
+
     if (_inflight[url]) return;
 
     if (checkCache(url, params, exactMatch, callback)) return;

@@ -5,7 +5,8 @@
       "add-headers:enabled", 
       "get-users:success", 
       "get-user:success",
-      "get-tile-data:success"
+      "get-tile-data:success",
+      "get-tag-info-key:success"
     ]
   },
   {
