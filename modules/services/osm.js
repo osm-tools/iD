@@ -3,7 +3,8 @@ import _throttle from 'lodash-es/throttle';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json, xml as d3_xml } from 'd3-fetch';
 
-import osmAuth from 'osm-auth';
+// import osmAuth from 'osm-auth';
+import {dummyOauth} from './dummy-auth';
 import RBush from 'rbush';
 
 import { JXON } from '../util/jxon';
@@ -15,10 +16,10 @@ import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler,
 var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
 var urlroot = 'http://ec2-18-193-73-121.eu-central-1.compute.amazonaws.com:3000';
-var oauth = osmAuth({
+var oauth = dummyOauth({
     url: urlroot,
-    oauth_consumer_key: 'LaCLESQCVm89b8U3EHLIr7kggwgPLRxkO1ePHXYV',
-    oauth_secret: 'aFCrf2SBWLlzai2FR7AkaYjQxE4AWT1ikNtUmDKw',
+    // oauth_consumer_key: 'LaCLESQCVm89b8U3EHLIr7kggwgPLRxkO1ePHXYV',
+    // oauth_secret: 'aFCrf2SBWLlzai2FR7AkaYjQxE4AWT1ikNtUmDKw',
     loading: authLoading,
     done: authDone
 });
