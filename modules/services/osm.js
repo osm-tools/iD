@@ -17,8 +17,8 @@ var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change
 var urlroot = 'http://ec2-18-193-73-121.eu-central-1.compute.amazonaws.com:3000';
 var oauth = osmAuth({
     url: urlroot,
-    oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
-    oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
+    oauth_consumer_key: 'LaCLESQCVm89b8U3EHLIr7kggwgPLRxkO1ePHXYV',
+    oauth_secret: 'aFCrf2SBWLlzai2FR7AkaYjQxE4AWT1ikNtUmDKw',
     loading: authLoading,
     done: authDone
 });
