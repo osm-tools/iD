@@ -13,7 +13,7 @@ import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilRebind, utilTiler,
 
 var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
-var urlroot = 'http://localhost:6790/psm/street-network';
+var urlroot = 'http://ec2-52-59-235-27.eu-central-1.compute.amazonaws.com:3000';
 var oauth = dummyOauth({
     url: urlroot,
     loading: authLoading,
