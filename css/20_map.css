@@ -205,6 +205,10 @@ path.stroke {
     stroke-width: 4;
 }
 
+path.fill-yellow {
+    fill: yellow !important;
+}
+
 path.shadow {
     stroke: #f6634f;
     stroke-width: 16;

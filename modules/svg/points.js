@@ -30,6 +30,7 @@ export function svgPoints(projection, context) {
 
     function drawTargets(selection, graph, entities, filter) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
+
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
         var data = [];
@@ -64,7 +65,9 @@ export function svgPoints(projection, context) {
             .attr('width', 20)
             .attr('height', 30)
             .merge(targets)
-            .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
+            .attr('class', function(d) { 
+                return 'node point target ' + fillClass + d.id; 
+            })
             .attr('transform', getTransform);
     }
 
@@ -115,7 +118,13 @@ export function svgPoints(projection, context) {
 
         enter
             .append('path')
-            .call(markerPath, 'stroke');
+            .call(markerPath, 'stroke')
+            .attr('class', function(d) { 
+                if(d.tags && d.tags.postal_object){
+                    return 'stroke fill-yellow'; 
+                }
+                return 'stroke'; 
+            });
 
         enter
             .append('use')
