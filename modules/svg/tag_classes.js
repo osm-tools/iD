@@ -7,7 +7,7 @@ export function svgTagClasses() {
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'building:part', 'indoor'
+        'building:part', 'indoor', 'postal_object'
     ];
     var statuses = [
         // nonexistent, might be built
@@ -70,11 +70,12 @@ export function svgTagClasses() {
             })
             .map(function(klass) {  // special overrides for some perimeter strokes
                 return (klass === 'line' || klass === 'area') ? (overrideGeometry || klass) : klass;
-            });
+            });            
 
         // pick at most one primary classification tag..
         for (i = 0; i < primaries.length; i++) {
             k = primaries[i];
+
             v = t[k];
             if (!v || v === 'no') continue;
 
