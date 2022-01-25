@@ -61,7 +61,7 @@
         "searchable": false
     },
     "postal_object/warehouse": {
-        "icon": "fas-warehouse",
+        "icon": "dpdhl-mailbox",
         "fields": [
             "name"
         ],
