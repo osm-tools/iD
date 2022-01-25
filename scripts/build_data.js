@@ -117,6 +117,7 @@ function buildData() {
           }
         }
       });
+      faIcons.add('fas-pallet');
       // copy over only those Font Awesome icons that we need
       writeFaIcons(faIcons);
     })

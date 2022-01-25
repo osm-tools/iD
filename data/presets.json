@@ -60,8 +60,8 @@
         },
         "searchable": false
     },
-    "postal_object/warehouse": {
-        "icon": "dpdhl-mailbox",
+    "postal_object/sorting_centre": {
+        "icon": "fas-pallet",
         "fields": [
             "name"
         ],
@@ -69,9 +69,9 @@
             "point"
         ],
         "tags": {
-            "postal_object": "warehouse"
+            "postal_object": "sorting_centre"
         },
-        "searchable": false
+        "searchable": true
     },
     "attraction": {
         "icon": "maki-star",

@@ -34,7 +34,7 @@
         "amenity/bank",
         "shop/supermarket",
         "point",
-        "postal_object/warehouse"
+        "postal_object/sorting_centre"
     ],
     "vertex": [
         "highway/crossing/marked",
