@@ -426,9 +426,61 @@ describe('iD.serviceOsm', function () {
     });
 
 
-    describe('#loadMultiple', function () {
-        it('loads nodes');
+    describe.only('#loadMultiple', function () {
+
+        var nodesResponse =
+            '{' +
+            '    "version":"0.6",' +
+            '    "elements":[' +
+            '        {"type":"node","id":1,"visible":true,"version":1,"changeset":28924294,"timestamp":"2009-03-07T03:26:33Z","user":"peace2","uid":119748,"lat":0,"lon":0},' +
+            '        {"type":"node","id":2,"visible":true,"version":1,"changeset":28924293,"timestamp":"2009-03-07T03:26:33Z","user":"peace2","uid":119748,"lat":0,"lon":0},' +
+            '{"type":"node","id":2,"visible":true,"version":1,"changeset":28924293,"timestamp":"2009-03-07T03:26:33Z","user":"peace2","uid":119748,"lat":0,"lon":0}' +
+            '    ]' +
+            '}';
+
+        // 'todo' : reescribir este para más de un node
+        it('loads nodes', function(done) {
+            var ids = [1,2];
+            connection.loadMultiple(ids, function(err, result) {
+                var entity = result.data.array.forEach(element => {
+                    (function(e) { return element.id === ids[e]; });
+                });
+                expect(entity).to.be.an.instanceOf(iD.osmNode);
+                done();
+            });
+
+            serverFetch.respondWith('GET', unsecuredURL + '/api/0.6/node/1.json',
+                [200, { 'Content-Type': 'application/json' }, nodesResponse]);
+            serverFetch.respond();
+        });
+
+        // it('loads nodes',function () {
+
+        //     var nodesIdsArray = [
+        //         {id : 11111,type : 'node'},
+        //         {id : 11112,type : 'node'},
+        //         {id : 11111,type : 'node'},
+        //         {id : 11114,type : 'node'},
+        //         {id : 11115,type : 'node'},
+        //         {id : 11116,type : 'node'},
+        //     ];
+        //     var callback = function() { return true; };
+        //     var spy = sinon.spy();
+        //     var expectedPath = '/api/0.6/nodes.json?nodes=11111,11112,11114,11115,11116';
+
+        //     osm.loadMultiple(nodesIdsArray, callback);
+        //     osm.loadFromAPI(expect)
+            
+    
+            
+        //     var osmIDs = nodeObject.id;
+        //     var type = nodeObject.type + 's';
+    
+        //     var path = '/api/0.6'+ type + '.json?' + type + '=' + {osmIDs};
+    
+        // });   
         it('loads ways');
+        it('loads relations');
         it('does not ignore repeat requests');
     });
 
