@@ -2532,8 +2532,8 @@
                     "name": "Postal Object"
                 },
                 "postal_object/sorting_centre": {
-                    "name": "DPDHL - Sorting Centre",
-                    "terms": "dpdhl,sort"
+                    "name": "XYZ - Sorting Centre",
+                    "terms": "xyz,sort"
                 },
                 "attraction": {
                     "name": "Attraction"
