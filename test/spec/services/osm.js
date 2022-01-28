@@ -1,10 +1,12 @@
 describe('iD.serviceOsm', function () {
     var context, connection, spy;
     var serverFetch, serverXHR;
+    var unsecuredURL = 'http://www.openstreetmap.org';
+    var securedURL = 'https://www.openstreetmap.org';
 
     function login() {
         connection.switch({
-            urlroot: 'http://www.openstreetmap.org',
+            urlroot: unsecuredURL,
             oauth_consumer_key: '5A043yRSEugj4DJ5TljuapfnrflWDte8jTOcWLlT',
             oauth_secret: 'aB3jKq1TRsCOUrfOIZ6oQMEDmv2ptV76PA54NGLL',
             oauth_token: 'foo',
@@ -29,7 +31,7 @@ describe('iD.serviceOsm', function () {
         serverXHR = sinon.fakeServer.create();      // authenticated calls use XHR via osm-auth
         context = iD.coreContext().assetPath('../dist/').init();
         connection = context.connection();
-        connection.switch({ urlroot: 'http://www.openstreetmap.org' });
+        connection.switch({ urlroot: unsecuredURL });
         connection.reset();
         spy = sinon.spy();
     });
@@ -49,7 +51,7 @@ describe('iD.serviceOsm', function () {
     });
 
     it('allows secure connections', function () {
-        connection.switch({ urlroot: 'https://www.openstreetmap.org'});
+        connection.switch({ urlroot: securedURL});
         expect(connection.changesetURL(2)).to.match(/^https:/);
     });
 
@@ -70,7 +72,7 @@ describe('iD.serviceOsm', function () {
 
     describe('#changesetURL', function() {
         it('provides a changeset url', function() {
-            expect(connection.changesetURL(2)).to.eql('http://www.openstreetmap.org/changeset/2');
+            expect(connection.changesetURL(2)).to.eql(unsecuredURL + '/changeset/2');
         });
     });
 
@@ -78,43 +80,43 @@ describe('iD.serviceOsm', function () {
         it('provides a local changesets url', function() {
             var center = [-74.65, 40.65];
             var zoom = 17;
-            expect(connection.changesetsURL(center, zoom)).to.eql('http://www.openstreetmap.org/history#map=17/40.65000/-74.65000');
+            expect(connection.changesetsURL(center, zoom)).to.eql(unsecuredURL + '/history#map=17/40.65000/-74.65000');
         });
     });
 
     describe('#entityURL', function() {
         it('provides an entity url for a node', function() {
             var e = iD.osmNode({id: 'n1'});
-            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/node/1');
+            expect(connection.entityURL(e)).to.eql(unsecuredURL + '/node/1');
         });
         it('provides an entity url for a way', function() {
             var e = iD.osmWay({id: 'w1'});
-            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/way/1');
+            expect(connection.entityURL(e)).to.eql(unsecuredURL + '/way/1');
         });
         it('provides an entity url for a relation', function() {
             var e = iD.osmRelation({id: 'r1'});
-            expect(connection.entityURL(e)).to.eql('http://www.openstreetmap.org/relation/1');
+            expect(connection.entityURL(e)).to.eql(unsecuredURL + '/relation/1');
         });
     });
 
     describe('#historyURL', function() {
         it('provides a history url for a node', function() {
             var e = iD.osmNode({id: 'n1'});
-            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/node/1/history');
+            expect(connection.historyURL(e)).to.eql(unsecuredURL + '/node/1/history');
         });
         it('provides a history url for a way', function() {
             var e = iD.osmWay({id: 'w1'});
-            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/way/1/history');
+            expect(connection.historyURL(e)).to.eql(unsecuredURL + '/way/1/history');
         });
         it('provides a history url for a relation', function() {
             var e = iD.osmRelation({id: 'r1'});
-            expect(connection.historyURL(e)).to.eql('http://www.openstreetmap.org/relation/1/history');
+            expect(connection.historyURL(e)).to.eql(unsecuredURL + '/relation/1/history');
         });
     });
 
     describe('#userURL', function() {
         it('provides a user url', function() {
-            expect(connection.userURL('bob')).to.eql('http://www.openstreetmap.org/user/bob');
+            expect(connection.userURL('bob')).to.eql(unsecuredURL + '/user/bob');
         });
     });
 
@@ -157,7 +159,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverFetch.respondWith('GET', unsecuredURL + path,
                 [200, { 'Content-Type': 'application/json' }, response]);
             serverFetch.respond();
         });
@@ -172,9 +174,9 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverXHR.respondWith('GET', unsecuredURL + path,
                 [400, { 'Content-Type': 'text/plain' }, 'Bad Request']);
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverFetch.respondWith('GET', unsecuredURL + path,
                 [200, { 'Content-Type': 'application/json' }, response]);
 
             serverXHR.respond();
@@ -190,9 +192,9 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverXHR.respondWith('GET', unsecuredURL + path,
                 [401, { 'Content-Type': 'text/plain' }, 'Unauthorized']);
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverFetch.respondWith('GET', unsecuredURL + path,
                 [200, { 'Content-Type': 'application/json' }, response]);
 
             serverXHR.respond();
@@ -208,9 +210,9 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverXHR.respondWith('GET', unsecuredURL + path,
                 [403, { 'Content-Type': 'text/plain' }, 'Forbidden']);
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverFetch.respondWith('GET', unsecuredURL + path,
                 [200, { 'Content-Type': 'application/json' }, response]);
 
             serverXHR.respond();
@@ -227,7 +229,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverFetch.respondWith('GET', unsecuredURL + path,
                 [509, { 'Content-Type': 'text/plain' }, 'Bandwidth Limit Exceeded']);
             serverFetch.respond();
         });
@@ -241,7 +243,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org' + path,
+            serverFetch.respondWith('GET', unsecuredURL + path,
                 [429, { 'Content-Type': 'text/plain' }, '429 Too Many Requests']);
             serverFetch.respond();
         });
@@ -320,7 +322,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1.json',
+            serverFetch.respondWith('GET', unsecuredURL + '/api/0.6/node/1.json',
                 [200, { 'Content-Type': 'application/json' }, nodeResponse]);
             serverFetch.respond();
         });
@@ -333,7 +335,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/full.json',
+            serverFetch.respondWith('GET', unsecuredURL + '/api/0.6/way/1/full.json',
                 [200, { 'Content-Type': 'application/json' }, wayResponse]);
             serverFetch.respond();
         });
@@ -351,7 +353,7 @@ describe('iD.serviceOsm', function () {
                 serverFetch.respond();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1.json',
+            serverFetch.respondWith('GET', unsecuredURL + '/api/0.6/node/1.json',
                 [200, { 'Content-Type': 'application/json' }, nodeResponse]);
             serverFetch.respond();
         });
@@ -383,7 +385,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1.json',
+            serverFetch.respondWith('GET', unsecuredURL + '/api/0.6/node/1/1.json',
                 [200, { 'Content-Type': 'application/json' }, nodeResponse]);
             serverFetch.respond();
         });
@@ -396,7 +398,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/way/1/1.json',
+            serverFetch.respondWith('GET', unsecuredURL + '/api/0.6/way/1/1.json',
                 [200, { 'Content-Type': 'application/json' }, wayResponse]);
             serverFetch.respond();
         });
@@ -414,7 +416,7 @@ describe('iD.serviceOsm', function () {
                 serverFetch.respond();
             });
 
-            serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/node/1/1.json',
+            serverFetch.respondWith('GET', unsecuredURL + '/api/0.6/node/1/1.json',
                 [200, { 'Content-Type': 'application/json' }, nodeResponse]);
             serverFetch.respond();
         });
@@ -464,7 +466,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', unsecuredURL + '/api/0.6/changesets?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
@@ -493,7 +495,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', unsecuredURL + '/api/0.6/changesets?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
@@ -523,7 +525,7 @@ describe('iD.serviceOsm', function () {
                 done();
             });
 
-            serverXHR.respondWith('GET', 'http://www.openstreetmap.org/api/0.6/changesets?user=1',
+            serverXHR.respondWith('GET', unsecuredURL + '/api/0.6/changesets?user=1',
                 [200, { 'Content-Type': 'text/xml' }, changesetsXML]);
             serverXHR.respond();
         });
@@ -577,9 +579,9 @@ describe('iD.serviceOsm', function () {
             '<osm>' +
             '<note lon="10" lat="0">' +
             '  <id>1</id>' +
-            '  <url>https://www.openstreetmap.org/api/0.6/notes/1</url>' +
-            '  <comment_url>https://www.openstreetmap.org/api/0.6/notes/1/comment</comment_url>' +
-            '  <close_url>https://www.openstreetmap.org/api/0.6/notes/1/close</close_url>' +
+            '  <url>' + securedURL + '/api/0.6/notes/1</url>' +
+            '  <comment_url>' + securedURL + '/api/0.6/notes/1/comment</comment_url>' +
+            '  <close_url>' + securedURL + '/api/0.6/notes/1/close</close_url>' +
             '  <date_created>2019-01-01 00:00:00 UTC</date_created>' +
             '  <status>open</status>' +
             '  <comments>' +
@@ -587,7 +589,7 @@ describe('iD.serviceOsm', function () {
             '      <date>2019-01-01 00:00:00 UTC</date>' +
             '      <uid>1</uid>' +
             '      <user>Steve</user>' +
-            '      <user_url>https://www.openstreetmap.org/user/Steve</user_url>' +
+            '      <user_url>' + securedURL + '/user/Steve</user_url>' +
             '      <action>opened</action>' +
             '      <text>This is a note</text>' +
             '      <html>&lt;p&gt;This is a note&lt;/p&gt;</html>' +
@@ -722,7 +724,7 @@ describe('iD.serviceOsm', function () {
                     done();
                 });
 
-                serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/capabilities',
+                serverFetch.respondWith('GET', unsecuredURL + '/api/capabilities',
                     [200, { 'Content-Type': 'text/xml' }, capabilitiesXML]);
                 serverFetch.respond();
             });
@@ -736,7 +738,7 @@ describe('iD.serviceOsm', function () {
                     done();
                 });
 
-                serverFetch.respondWith('GET', 'http://www.openstreetmap.org/api/capabilities',
+                serverFetch.respondWith('GET', unsecuredURL + '/api/capabilities',
                     [200, { 'Content-Type': 'text/xml' }, capabilitiesXML]);
                 serverFetch.respond();
             });
