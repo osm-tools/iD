@@ -115,7 +115,13 @@ export function svgPoints(projection, context) {
 
         enter
             .append('path')
-            .call(markerPath, 'stroke');
+            .call(markerPath, 'stroke')
+            .attr('class', function(d) { 
+                if(d.tags && d.tags.postal_object){
+                    return 'stroke fill-yellow'; 
+                }
+                return 'stroke'; 
+            });
 
         enter
             .append('use')

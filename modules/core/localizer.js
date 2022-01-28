@@ -86,9 +86,9 @@ export function coreLocalizer() {
         ];
 
         const localeDirs = {
-            general: 'locales',
-            tagging: 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/translations'
-        };
+          general: 'locales',
+          tagging: 'translations'
+      };
 
         let fileMap = fileFetcher.fileMap();
         for (let scopeId in localeDirs) {

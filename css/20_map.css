@@ -1,4 +1,9 @@
 /* base styles */
+path.fill-yellow {
+    fill: yellow !important;
+}
+
+
 .layer-osm path {
     fill: none;
 }
