@@ -14,6 +14,7 @@ import serviceVectorTile from './vector_tile';
 import serviceWikidata from './wikidata';
 import serviceWikipedia from './wikipedia';
 
+export { dummyOauth } from './dummy-auth';
 
 export let services = {
   geocoder: serviceNominatim,

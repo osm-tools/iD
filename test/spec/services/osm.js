@@ -153,6 +153,9 @@ describe('iD.serviceOsm', function () {
             '}';
 
         it('returns an object', function(done) {
+
+            connection.authenticated = function() { return false; };
+
             connection.loadFromAPI(path, function (err, payload) {
                 expect(err).to.not.be.ok;
                 expect(typeof payload).to.eql('object');
