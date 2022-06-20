@@ -89,7 +89,8 @@ export function coreLocalizer() {
 
         const localeDirs = {
             general: 'locales',
-            tagging: 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/translations'
+            // tagging: 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@3/dist/translations'
+            tagging: 'translations'
         };
 
         let fileMap = fileFetcher.fileMap();
@@ -112,8 +113,8 @@ export function coreLocalizer() {
                     .concat(['en']);   // fallback to English since it's the only guaranteed complete language
 
                 _localeCodes = localesToUseFrom(requestedLocales);
-                _localeCode = _localeCodes[0];   // Run iD in the highest-priority locale; the rest are fallbacks
 
+                _localeCode = checkLangueCode(_localeCodes, 0);
                 let loadStringsPromises = [];
 
                 indexes.forEach((index, i) => {
@@ -125,8 +126,9 @@ export function coreLocalizer() {
                     _localeCodes.slice(0, fullCoverageIndex + 1).forEach(function(code) {
                         let scopeId = Object.keys(localeDirs)[i];
                         let directory = Object.values(localeDirs)[i];
+
                         if (index[code]) loadStringsPromises.push(localizer.loadLocale(code, scopeId, directory));
-                    });
+                      });
                 });
 
                 return Promise.all(loadStringsPromises);
@@ -140,10 +142,9 @@ export function coreLocalizer() {
     // Returns the locales from `requestedLocales` supported by iD that we should use
     function localesToUseFrom(requestedLocales) {
         let supportedLocales = _dataLocales;
-
         let toUse = [];
         for (let i in requestedLocales) {
-            let locale = requestedLocales[i];
+            let locale = checkLangueCode(requestedLocales, i);
             if (supportedLocales[locale]) toUse.push(locale);
 
             if (locale.includes('-')) {
@@ -154,6 +155,12 @@ export function coreLocalizer() {
         }
         // remove duplicates
         return utilArrayUniq(toUse);
+    }
+    // The function return the array of languages and take the default one (top of language in list supported by browsers)
+    // check if the language has (-) if true slice 2 character code
+    function checkLangueCode(table, index) {
+      const localCodes = table[index].includes('-') ? table[index].slice(0,2) : table[index];
+      return localCodes;
     }
 
     function updateForCurrentLocale() {

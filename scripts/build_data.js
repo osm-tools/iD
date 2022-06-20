@@ -54,6 +54,7 @@ function buildData() {
     'data/territory_languages.json',
     'dist/locales/en.json',
     'dist/data/*',
+    "dist/translations/*"
   ]);
 
   // compile Font Awesome icons
@@ -86,21 +87,27 @@ function buildData() {
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
     minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
+    minifyJSON('data/presets.json', 'dist/data/presets.min.json'),
+    minifyJSON('data/preset_defaults.json', 'dist/data/preset_defaults.min.json'),
+    minifyJSON('translations/index.json', 'dist/translations/index.min.json'),
+    minifyJSON('translations/en.json', 'dist/translations/en.min.json'),
+    minifyJSON('translations/de.json', 'dist/translations/de.min.json'),
+    minifyJSON('translations/fr.json', 'dist/translations/fr.min.json'),
   ];
 
   return _currBuild =
     Promise.all(tasks)
-    .then(() => {
-      console.timeEnd(END);
-      console.log('');
-      _currBuild = null;
-    })
-    .catch((err) => {
-      console.error(err);
-      console.log('');
-      _currBuild = null;
-      process.exit(1);
-    });
+      .then(() => {
+        console.timeEnd(END);
+        console.log('');
+        _currBuild = null;
+      })
+      .catch((err) => {
+        console.error(err);
+        console.log('');
+        _currBuild = null;
+        process.exit(1);
+      });
 }
 
 
@@ -116,6 +123,7 @@ function readQAIssueIcons(faIcons) {
         faIcons.add(icon);
       }
     }
+    faIcons.add('fas-pallet');
   }
 }
 
