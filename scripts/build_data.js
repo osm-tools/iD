@@ -92,9 +92,7 @@ function buildData() {
     minifyJSON('translations/index.json', 'dist/translations/index.min.json'),
     minifyJSON('translations/en.json', 'dist/translations/en.min.json'),
     minifyJSON('translations/de.json', 'dist/translations/de.min.json'),
-    minifyJSON('translations/de.json', 'dist/translations/de-DE.min.json'),
     minifyJSON('translations/fr.json', 'dist/translations/fr.min.json'),
-    minifyJSON('translations/fr.json', 'dist/translations/fr-FR.min.json'),
   ];
 
   return _currBuild =
