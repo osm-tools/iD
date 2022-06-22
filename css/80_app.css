@@ -4291,6 +4291,7 @@ img.tile-debug {
 .orange  { color: rgba(255, 153, 0, 0.75); }
 .pink    { color: rgba(255, 0, 153, 0.75); }
 .purple  { color: rgba(153, 0, 255, 0.75); }
+.privateLine { stroke: rgba(255, 0, 0, 0.75)!important; stroke-width: 5!important;  }
 
 .debug-legend {
     position: absolute;

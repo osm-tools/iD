@@ -75,10 +75,13 @@ export function svgLines(projection, context) {
             .merge(targets)
             .attr('d', getPath)
             .attr('class', function(d) {
-                return 'way line target target-allowed ' + targetClass + d.id;
+                const tags = d?.properties?.entity?.tags;
+             //GEDAS-397 Visualize private street wih red color in PSM editor
+               return tags['gedas:private'] === 'yes' ?
+               `way line target privateLine target-allowed ${targetClass} ${d.id} `:
+               `way line target nocolor target-allowed ${targetClass} ${d.id} `;
             })
             .classed('segment-edited', segmentWasEdited);
-
         // NOPE
         var nopeData = data.nopes.filter(getPath);
         var nopes = selection.selectAll('.line.target-nope')
