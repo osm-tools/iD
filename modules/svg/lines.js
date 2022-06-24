@@ -75,7 +75,9 @@ export function svgLines(projection, context) {
             .merge(targets)
             .attr('d', getPath)
             .attr('class', function(d) {
-                return 'way line target target-allowed ' + targetClass + d.id;
+                return  d?.properties?.entity?.tags.access === 'no' ?
+                'way line target red target-allowed ' + targetClass + d.id :
+                'way line target nocolor target-allowed ' + targetClass + d.id;
             })
             .classed('segment-edited', segmentWasEdited);
 
