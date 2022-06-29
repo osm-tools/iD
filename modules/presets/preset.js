@@ -71,6 +71,7 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
 
     // boost score for additional matches in addTags - #6802
     const addTags = _this.addTags;
+    addTags['gedas:private'] = '*';
     for (let k in addTags) {
       if (!seen[k] && entityTags[k] === addTags[k]) {
         score += _this.originalScore;
@@ -80,7 +81,6 @@ export function presetPreset(presetID, preset, addable, allFields, allPresets) {
     if (_this.searchable === false) {
       score *= 0.999;
     }
-
     return score;
   };
 

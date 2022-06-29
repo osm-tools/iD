@@ -70,11 +70,7 @@ export function svgPoints(projection, context) {
             .attr('height', 30)
             .merge(targets)
             .attr('class', function(d) { 
-                const tags = d?.properties?.entity?.tags;
-                const checkDeliveryPoint = tags['gedas:postal_object'] === 'delivery_point';
-                return checkDeliveryPoint ?
-                `node point stroke-yellow target ${fillClass} ${d.id} `:
-                `node point target ${fillClass} ${d.id} `;
+                return `node point target ${fillClass} ${d.id} `;
             })
             .attr('transform', getTransform);
     }
