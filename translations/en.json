@@ -8182,6 +8182,9 @@
                 },
                 "postal_object/sorting_center": {
                     "name": "Sorting Center"
+                },
+                "postal_object/delivery_point": {
+                    "name": "delivery point"
                 }
             }
         }

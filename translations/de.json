@@ -8580,6 +8580,9 @@
                 },
                 "postal_object/sorting_center": {
                     "name": "Sortierzentrum"
+                },
+                "postal_object/delivery_point": {
+                    "name": "Lieferort"
                 }
             }
         }

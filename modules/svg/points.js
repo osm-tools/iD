@@ -9,7 +9,12 @@ export function svgPoints(projection, context) {
 
     function markerPath(selection, klass) {
         selection
-            .attr('class', klass)
+            .attr('class', function(){
+                const tags = selection?._groups[0][0]?.__data__?.tags;
+                return tags['gedas:private']==='yes' ?
+                ' stroke-yellow ':
+                klass;
+            })
             .attr('transform', 'translate(-8, -23)')
             .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
     }
@@ -64,7 +69,13 @@ export function svgPoints(projection, context) {
             .attr('width', 20)
             .attr('height', 30)
             .merge(targets)
-            .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
+            .attr('class', function(d) { 
+                const tags = d?.properties?.entity?.tags;
+                const checkDeliveryPoint = tags['gedas:postal_object'] === 'delivery_point';
+                return checkDeliveryPoint ?
+                `node point stroke-yellow target ${fillClass} ${d.id} `:
+                `node point target ${fillClass} ${d.id} `;
+            })
             .attr('transform', getTransform);
     }
 
@@ -111,7 +122,9 @@ export function svgPoints(projection, context) {
             .attr('cy', 1)
             .attr('rx', 6.5)
             .attr('ry', 3)
-            .attr('class', 'stroke');
+            .attr('class', function () {
+                return 'stroke';
+            });
 
         enter
             .append('path')

@@ -8458,6 +8458,9 @@
                 },
                 "postal_object/sorting_center": {
                     "name": "Centre de tri"
+                },
+                "postal_object/delivery_point": {
+                    "name": "point de livraison"
                 }
             }
         }

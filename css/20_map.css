@@ -109,7 +109,11 @@ g.note.active .stroke {
     fill: #222;
     opacity: 0.8;
 }
-
+g.point .stroke-yellow {
+    stroke: #444 !important;
+    stroke-width: 1 !important;
+    fill: rgb(255, 251, 0) !important;
+}
 g.point .stroke {
     stroke: #444;
     stroke-width: 1;
@@ -443,4 +447,13 @@ g.vertex.highlighted .shadow {
 
 .tag-postal_object path.stroke {
     fill: yellow;
+}
+
+/*____ delivery point */
+ .dpdhl-delivery_point{
+    width: 50%!important;
+}
+/*____ mailbox point */
+.dpdhl-mailbox{
+    width: 50%!important;
 }

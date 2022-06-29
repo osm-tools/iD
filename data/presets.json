@@ -25563,5 +25563,19 @@
             "gedas:private": "yes"
         },
         "searchable": true
-    }
-}
+    },
+    "postal_object/delivery_point": {
+        "icon": "dpdhl-delivery_point",
+        "fields": [
+            "name"
+        ],
+        "geometry": [
+            "point"
+        ],
+        "tags": {
+            "gedas:postal_object": "delivery_point",
+            "gedas:private": "yes",
+            "gedas:rio_id": ""
+        },
+        "searchable": true
+}}
