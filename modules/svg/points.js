@@ -69,7 +69,7 @@ export function svgPoints(projection, context) {
             .attr('width', 20)
             .attr('height', 30)
             .merge(targets)
-            .attr('class', function(d) { 
+            .attr('class', function(d) {
                 return `node point target ${fillClass} ${d.id} `;
             })
             .attr('transform', getTransform);

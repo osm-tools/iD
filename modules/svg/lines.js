@@ -76,6 +76,7 @@ export function svgLines(projection, context) {
             .attr('d', getPath)
             .attr('class', function(d) {
                //GEDAS-397 Visualize private street wih red color in PSM editor
+            // eslint-disable-next-line no-unused-expressions
             d.properties.entity.tags['gedas:private'] === 'yes' ?
             d.properties.entity.tags['gedas:private'] = 'yes':
             d.properties.entity.tags['gedas:private'] = 'no';

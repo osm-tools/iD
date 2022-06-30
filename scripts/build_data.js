@@ -4,7 +4,7 @@ const fs = require('fs');
 const prettyStringify = require('json-stringify-pretty-compact');
 const shell = require('shelljs');
 const YAML = require('js-yaml');
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 const languageNames = require('./language_names.js');
 
@@ -54,7 +54,7 @@ function buildData() {
     'data/territory_languages.json',
     'dist/locales/en.json',
     'dist/data/*',
-    "dist/translations/*"
+    'dist/translations/*'
   ]);
 
   // compile Font Awesome icons
