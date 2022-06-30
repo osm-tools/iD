@@ -11,9 +11,12 @@ export function svgPoints(projection, context) {
         selection
             .attr('class', function(){
                 const tags = selection?._groups[0][0]?.__data__?.tags;
-                return tags['gedas:private']==='yes' ?
-                ' stroke-yellow ':
-                klass;
+                if ( tags['gedas:private']==='yes'){
+                    tags['gedas:footpoint'] = 'yes';
+                    return ' stroke-yellow';
+                } else {
+                    return klass;
+                }
             })
             .attr('transform', 'translate(-8, -23)')
             .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');

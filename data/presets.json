@@ -25575,7 +25575,8 @@
         "tags": {
             "gedas:postal_object": "delivery_point",
             "gedas:private": "yes",
-            "gedas:rio_id": ""
+            "gedas:rio_id": "",
+            "gedas:footpoint": "no"
         },
         "searchable": true
 }}
