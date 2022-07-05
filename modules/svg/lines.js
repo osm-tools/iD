@@ -74,15 +74,19 @@ export function svgLines(projection, context) {
             .append('path')
             .merge(targets)
             .attr('d', getPath)
+            .attr('stroke-path', function(d){
+                const tags = d.properties.entity.tags;
+                return tags['gedas:location'] === 'yes' ? 'not-exist' : 'exist';
+            })
             .attr('class', function(d) {
-               //GEDAS-397 Visualize private street wih red color in PSM editor
+            const tags = d.properties.entity.tags;
             // eslint-disable-next-line no-unused-expressions
-            d.properties.entity.tags['gedas:private'] === 'yes' ?
-            d.properties.entity.tags['gedas:private'] = 'yes':
-            d.properties.entity.tags['gedas:private'] = 'no';
-               return d.properties.entity.tags['gedas:private'] === 'yes' ?
-                `way line target privateLine nocolor target-allowed ${targetClass} ${d.id} `:
-                `way line target nocolor target-allowed ${targetClass} ${d.id} `;
+            tags['gedas:private'] === 'yes' ? tags['gedas:private'] = 'yes': tags['gedas:private'] = 'no';
+            if ( tags['gedas:private'] === 'yes' ){
+                return   `way line target ${ tags['gedas:location'] === 'yes' ? 'privateConnectionLine' : 'privateLine' } nocolor target-allowed ${targetClass} ${d.id} `;
+            } else {
+                return   `way line target nocolor notConnectionLine target-allowed ${targetClass} ${d.id} `;
+            }
             })
             .classed('segment-edited', segmentWasEdited);
 
@@ -141,6 +145,7 @@ export function svgLines(projection, context) {
             lines.enter()
                 .append('path')
                 .attr('class', function(d) {
+
                     var prefix = 'way line';
 
                     // if this line isn't styled by its own tags

@@ -250,8 +250,8 @@ export function svgVertices(projection, context) {
             })
             .merge(targets)
             .attr('class', function(d) {
-                return 'node vertex target target-allowed '
-                + targetClass + d.id;
+                const checkFootPoint = d?.properties?.entity?.tags['gedas:footpoint'] === 'yes';
+                return  `node vertex ${checkFootPoint ? 'vertex_yellow' : ''} target target-allowed ${targetClass} ${d.id}`;
             })
             .attr('transform', getTransform);
 

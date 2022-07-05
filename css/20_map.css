@@ -112,7 +112,7 @@ g.note.active .stroke {
 g.point .stroke-yellow {
     stroke: #444 !important;
     stroke-width: 1 !important;
-    fill: rgb(255, 251, 0) !important;
+    fill: rgb(255, 204, 0) !important;
 }
 g.point .stroke {
     stroke: #444;
@@ -203,11 +203,33 @@ path.line {
     stroke-linecap: round;
     stroke-linejoin: round;
 }
-
-path.stroke {
-    stroke: #000;
-    stroke-width: 4;
+/* .ideditor path.line.stroke */
+path.line.privateConnectionLine { 
+    stroke: rgba(255, 204, 0, 1)!important; 
+    stroke-width: 12!important;  
+    stroke-dasharray : 1,20 !important; 
+    stroke-linecap : round !important;
+    }
+path.line.notConnectionLine{
+    stroke: #fff !important;
+    stroke-width: 0 !important;
 }
+    path.line.stroke[stroke-path = "exist"] {
+        stroke: #fff;
+        stroke-width: 2;
+    }
+    path.line.stroke[stroke-path = "not-exist"] {
+        stroke: none;
+        stroke-width: 0;
+    }
+    /* path.line.strok {
+        stroke: #fff;
+        stroke-width: 2;
+    } */
+    path.stroke {
+        stroke: #000;
+        stroke-width: 0;
+    }
 
 path.shadow {
     stroke: #f6634f;
@@ -225,10 +247,11 @@ path.shadow.hover:not(.selected) {
 path.shadow.selected {
     stroke-opacity: 0.7;
 }
+/* privateConnectionLine */
 
-path.line.stroke {
-    stroke: #fff;
-    stroke-width: 2;
+path[stroke-path="not-exist"] {
+    stroke: none!important; 
+    stroke-width: 0!important;  
 }
 
 
@@ -451,9 +474,9 @@ g.vertex.highlighted .shadow {
 
 /*____ delivery point */
  .dpdhl-delivery_point{
-    width: 50%!important;
+    color: rgb(255,204,0,0.75);
 }
 /*____ mailbox point */
 .dpdhl-mailbox{
-    width: 50%!important;
+    color: rgb(255,204,0,0.75);
 }

@@ -4290,7 +4290,10 @@ img.tile-debug {
 
 /* GEDAS-397 Visualize private street wih red color in PSM editor*/
 .privateLine { stroke: rgba(255, 0, 0, 0.75)!important; stroke-width: 5!important;  }
-.icon-private{ fill:  rgba(255, 255, 0, 0.75) !important; }
+.vertex_yellow{ stroke: #D40511!important; stroke-width: 2;}
+.icon-private{ fill:  rgba(255, 204, 0, 0.75) !important; }
+.icon-private-editor{ color:  rgba(255, 204, 0, 0.75) !important; fill:  rgba(255, 204, 0, 0.75) !important; }
+
 .debug-legend {
     position: absolute;
     top: 70px;

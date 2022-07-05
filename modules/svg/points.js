@@ -9,7 +9,7 @@ export function svgPoints(projection, context) {
      function markerPath(selection, klass) {
          selection
             .attr('class', function(d){
-                if (d?.tags['gedas:private'] === 'yes' && d?.tags['gedas:rio_id']){
+                if (d?.tags['gedas:private'] === 'yes'){
                     d.tags['gedas:footpoint'] = 'yes';
                     return 'stroke-yellow';
               } else {
