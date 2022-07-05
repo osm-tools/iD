@@ -24,6 +24,7 @@
     ],
     "point": [
         "postal_object/sorting_center",
+        "postal_object/delivery_point",
         "category-natural",
         "leisure/park",
         "amenity/hospital",

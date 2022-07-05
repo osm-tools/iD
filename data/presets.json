@@ -25573,10 +25573,7 @@
             "point"
         ],
         "tags": {
-            "gedas:postal_object": "delivery_point",
-            "gedas:private": "yes",
-            "gedas:rio_id": "",
-            "gedas:footpoint": "no"
+            "gedas:private": "yes"
         },
         "searchable": true
 }}
