@@ -13,10 +13,9 @@ import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRe
 
 var tiler = utilTiler();
 var dispatch = d3_dispatch('apiStatusChange', 'authLoading', 'authDone', 'change', 'loading', 'loaded', 'loadedNotes');
-
-var urlroot = 'https://www.openstreetmap.org';
-var redirectPath = window.location.origin + window.location.pathname;
-var oauth = osmAuth({
+// var urlroot = 'http://localhost:6790/street-network';
+var urlroot = 'https://psm-test-01.gedas.test.azure.deutschepost.de/street-network';
+var oauth = dummyOauth({
     url: urlroot,
     client_id: '0tmNTmd0Jo1dQp4AUmMBLtGiD9YpMuXzHefitcuVStc',
     client_secret: 'BTlNrNxIPitHdL4sP2clHw5KLoee9aKkA7dQbc0Bj7Q',

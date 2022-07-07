@@ -6,10 +6,16 @@ import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
 
 export function svgPoints(projection, context) {
-
-    function markerPath(selection, klass) {
-        selection
-            .attr('class', klass)
+     function markerPath(selection, klass) {
+         selection
+            .attr('class', function(d){
+                if (d?.tags['gedas:private'] === 'yes'){
+                    const checkFootpoint = d.tags['gedas:footpoint'] === 'yes';
+                    return checkFootpoint ? 'nocolor' : 'stroke-yellow';
+              } else {
+                    return klass;
+              }
+            })
             .attr('transform', 'translate(-8, -23)')
             .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
     }

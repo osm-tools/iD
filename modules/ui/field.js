@@ -241,7 +241,7 @@ export function uiField(context, presetField, entityIDs, options) {
 
             icon.enter()
                 .append('svg')
-                .attr('class', 'icon')
+                .attr('class', 'icon hello2 ')
                 .append('use')
                 .attr('xlink:href', '#fas-lock');
 

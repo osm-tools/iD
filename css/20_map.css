@@ -23,7 +23,7 @@
 }
 
 /* the above fill: none rule affects paths in <use> shadow dom only in Firefox */
-.layer-osm use.icon path { fill: #333; }                       /* FF svg Maki icons */
+.layer-osm use.icon path { fill: rgb(233, 35, 35); }                       /* FF svg Maki icons */
 .layer-osm .turn use path { fill: #000; }                      /* FF turn restriction icons */
 #turn-only-shape2, #turn-only-u-shape2 { fill: #7092ff; }      /* FF turn-only, turn-only-u */
 #turn-no-shape2, #turn-no-u-shape2     { fill: #e06d5f; }      /* FF turn-no, turn-no-u */
@@ -109,7 +109,11 @@ g.note.active .stroke {
     fill: #222;
     opacity: 0.8;
 }
-
+g.point .stroke-yellow {
+    stroke: #444 !important;
+    stroke-width: 1 !important;
+    fill: rgba(255, 204, 0, 0.75) !important;
+}
 g.point .stroke {
     stroke: #444;
     stroke-width: 1;
@@ -221,7 +225,12 @@ path.shadow.hover:not(.selected) {
 path.shadow.selected {
     stroke-opacity: 0.7;
 }
-
+path.line.privateConnectionLine { 
+    stroke: rgba(255, 204, 0, 1)!important; 
+    stroke-width: 12!important;  
+    stroke-dasharray : 1,20 !important; 
+    stroke-linecap : round !important;
+    }
 path.line.stroke {
     stroke: #fff;
     stroke-width: 2;
@@ -439,4 +448,16 @@ g.vertex.highlighted .shadow {
 .highlight-edited path.line.shadow.geometry-edited,
 .highlight-edited path.area.shadow.geometry-edited {
     stroke: rgb(255, 126, 46);
+}
+.tag-postal_object path.stroke {
+    fill: rgba(255, 204, 0, 0.75);
+}
+
+/*____ delivery point */
+ .dpdhl-delivery_point{
+    width: 50%!important;
+}
+/*____ mailbox point */
+.dpdhl-mailbox{
+    width: 50%!important;
 }

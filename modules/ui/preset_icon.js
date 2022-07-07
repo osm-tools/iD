@@ -40,7 +40,7 @@ export function uiPresetIcon() {
 
     pointBorderEnter
       .append('svg')
-      .attr('class', 'preset-icon-fill preset-icon-point-border')
+      .attr('class', 'preset-icon-fill hello preset-icon-point-border')
       .attr('width', w)
       .attr('height', h)
       .attr('viewBox', `0 0 ${w} ${h}`)
@@ -316,10 +316,13 @@ export function uiPresetIcon() {
       .attr('class', 'preset-icon ' + (geom ? geom + '-geom' : ''))
       .classed('category', category)
       .classed('framed', isFramed)
-      .classed('preset-icon-iD', isiDIcon);
+      .classed('preset-icon-iD', (d) => {
+        console.log(d);
+        return isiDIcon;
+      });
 
     icon.selectAll('svg')
-      .attr('class', 'icon ' + picon + ' ' + (!isiDIcon && geom !== 'line'  ? '' : tagClasses));
+      .attr('class', 'icon  ' + picon + ' ' + (!isiDIcon && geom !== 'line'  ? '' : tagClasses));
 
     icon.selectAll('use')
       .attr('href', '#' + picon);

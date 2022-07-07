@@ -75,7 +75,18 @@ export function svgLines(projection, context) {
             .merge(targets)
             .attr('d', getPath)
             .attr('class', function(d) {
+<<<<<<< Updated upstream
                 return 'way line target target-allowed ' + targetClass + d.id;
+=======
+            const tags = d.properties.entity.tags;
+            // eslint-disable-next-line no-unused-expressions
+            tags['gedas:private'] === 'yes' ? tags['gedas:private'] = 'yes': tags['gedas:private'] = 'no';
+            if ( tags['gedas:private'] === 'yes' ){
+                return   `way line target ${ tags['gedas:location'] === 'yes' ? 'privateConnectionLine' : 'privateLine' } nocolor target-allowed ${targetClass} ${d.id} `;
+            } else {
+                return   `way line target nocolor target-allowed ${targetClass} ${d.id} `;
+            }
+>>>>>>> Stashed changes
             })
             .classed('segment-edited', segmentWasEdited);
 
