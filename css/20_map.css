@@ -474,9 +474,11 @@ g.vertex.highlighted .shadow {
 
 /*____ delivery point */
  .dpdhl-delivery_point{
-    color: rgb(255,204,0,0.75);
+    width: 50% !important;
+    color: rgb(255,204,0);
 }
 /*____ mailbox point */
 .dpdhl-mailbox{
-    color: rgb(255,204,0,0.75);
+    width: 50% !important;
+    color: rgb(255,204,0);
 }
