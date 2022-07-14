@@ -10,7 +10,6 @@ export function svgPoints(projection, context) {
          selection
             .attr('class', function(d){
                 if (d?.tags['gedas:private'] === 'yes'){
-                    d.tags['gedas:footpoint'] = 'yes';
                     return 'stroke-yellow';
               } else {
                     return klass;

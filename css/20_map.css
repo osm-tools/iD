@@ -204,23 +204,25 @@ path.line {
     stroke-linejoin: round;
 }
 /* .ideditor path.line.stroke */
-path.line.privateConnectionLine { 
+/* privateLocationWay : [ if is is a way connection between footpoint and delivery point */
+path.line.private-location-way { 
     stroke: rgba(255, 204, 0, 1)!important; 
     stroke-width: 12!important;  
     stroke-dasharray : 1,20 !important; 
     stroke-linecap : round !important;
     }
-path.line.notConnectionLine{
+    /* else way by default ] */
+path.line.not-private-location-way{
     stroke: #fff !important;
-    stroke-width: 0 !important;
+    stroke-width: 5 !important;
 }
     path.line.stroke[stroke-path = "exist"] {
-        stroke: #fff;
-        stroke-width: 2;
+        stroke: #fff !important;
+        stroke-width: 2 !important;
     }
     path.line.stroke[stroke-path = "not-exist"] {
-        stroke: none;
-        stroke-width: 0;
+        stroke: none !important;
+        stroke-width: 0 !important;
     }
     /* path.line.strok {
         stroke: #fff;
@@ -247,13 +249,6 @@ path.shadow.hover:not(.selected) {
 path.shadow.selected {
     stroke-opacity: 0.7;
 }
-/* privateConnectionLine */
-
-path[stroke-path="not-exist"] {
-    stroke: none!important; 
-    stroke-width: 0!important;  
-}
-
 
 /* Labels / Markers */
 text {

@@ -78,7 +78,6 @@ export function svgVertices(projection, context) {
                     .each(function(entity) {
                         var i = z && getIcon(entity);
                         var r = rads[i ? 3 : z];
-
                         // slightly increase the size of unconnected endpoints #3775
                         if (entity.id !== activeID && entity.isEndpoint(graph) && !entity.isConnected(graph)) {
                             r += 1.5;
@@ -203,12 +202,12 @@ export function svgVertices(projection, context) {
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
         var data = { targets: [], nopes: [] };
-
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
 
             var vertexType = svgPassiveVertex(node, graph, activeID);
-            if (vertexType !== 0) {     // passive or adjacent - allow to connect
+              // passive or adjacent - allow to connect
+            if (vertexType !== 0) {   
                 data.targets.push({
                     type: 'Feature',
                     id: node.id,
@@ -234,13 +233,11 @@ export function svgVertices(projection, context) {
 
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.vertex.target-allowed')
-            .filter(function(d) { return filter(d.properties.entity); })
-            .data(data.targets, function key(d) { return d.id; });
-
+            .filter(function(d) { return filter(d?.properties?.entity); })
+            .data(data?.targets, function key(d) { return d?.id; });
         // exit
         targets.exit()
             .remove();
-
         // enter/update
         targets.enter()
             .append('circle')
@@ -251,7 +248,8 @@ export function svgVertices(projection, context) {
             .merge(targets)
             .attr('class', function(d) {
                 const checkFootPoint = d?.properties?.entity?.tags['gedas:footpoint'] === 'yes';
-                return  `node vertex ${checkFootPoint ? 'vertex_yellow' : ''} target target-allowed ${targetClass} ${d.id}`;
+                const checkPrivatePoint = d?.properties?.entity?.tags['gedas:private'] === 'yes';
+                    return `node vertex ${( checkPrivatePoint && checkFootPoint) ? 'vertex-yellow' : ''} target target-allowed ${targetClass} ${d.id}`;
             })
             .attr('transform', getTransform);
 

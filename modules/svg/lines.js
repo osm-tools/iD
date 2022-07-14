@@ -79,14 +79,13 @@ export function svgLines(projection, context) {
                 return tags['gedas:location'] === 'yes' ? 'not-exist' : 'exist';
             })
             .attr('class', function(d) {
-            const tags = d.properties.entity.tags;
+            const tags = d?.properties?.entity?.tags;
+            const gedasLocation = tags['gedas:location'] === 'yes';
+            const gedasPrivate = tags['gedas:private'] === 'yes';
             // eslint-disable-next-line no-unused-expressions
-            tags['gedas:private'] === 'yes' ? tags['gedas:private'] = 'yes': tags['gedas:private'] = 'no';
-            if ( tags['gedas:private'] === 'yes' ){
-                return   `way line target ${ tags['gedas:location'] === 'yes' ? 'privateConnectionLine' : 'privateLine' } nocolor target-allowed ${targetClass} ${d.id} `;
-            } else {
-                return   `way line target nocolor notConnectionLine target-allowed ${targetClass} ${d.id} `;
-            }
+                return  gedasPrivate ? `way line target ${ gedasLocation ?
+                    'private-location-way' : 'private-red-way' } nocolor target-allowed ${targetClass} ${d.id} `:
+                    `way line target nocolor not-private-location-way target-allowed ${targetClass} ${d.id} `;
             })
             .classed('segment-edited', segmentWasEdited);
 
