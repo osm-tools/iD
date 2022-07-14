@@ -210,17 +210,18 @@ path.line.privateConnectionLine {
     stroke-dasharray : 1,20 !important; 
     stroke-linecap : round !important;
     }
+    
 path.line.notConnectionLine{
     stroke: #fff !important;
-    stroke-width: 0 !important;
+    stroke-width: 5 !important;
 }
     path.line.stroke[stroke-path = "exist"] {
-        stroke: #fff;
-        stroke-width: 2;
+        stroke: #fff !important;
+        stroke-width: 2 !important;
     }
     path.line.stroke[stroke-path = "not-exist"] {
-        stroke: none;
-        stroke-width: 0;
+        stroke: none !important;
+        stroke-width: 0 !important;
     }
     /* path.line.strok {
         stroke: #fff;
@@ -247,13 +248,6 @@ path.shadow.hover:not(.selected) {
 path.shadow.selected {
     stroke-opacity: 0.7;
 }
-/* privateConnectionLine */
-
-path[stroke-path="not-exist"] {
-    stroke: none!important; 
-    stroke-width: 0!important;  
-}
-
 
 /* Labels / Markers */
 text {

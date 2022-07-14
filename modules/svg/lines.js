@@ -83,7 +83,7 @@ export function svgLines(projection, context) {
             // eslint-disable-next-line no-unused-expressions
             tags['gedas:private'] === 'yes' ? tags['gedas:private'] = 'yes': tags['gedas:private'] = 'no';
             if ( tags['gedas:private'] === 'yes' ){
-                return   `way line target ${ tags['gedas:location'] === 'yes' ? 'privateConnectionLine' : 'privateLine' } nocolor target-allowed ${targetClass} ${d.id} `;
+                return   `way line target ${ tags['gedas:location'] === 'yes' ? 'privateConnectionLine' : 'privateRedLine' } nocolor target-allowed ${targetClass} ${d.id} `;
             } else {
                 return   `way line target nocolor notConnectionLine target-allowed ${targetClass} ${d.id} `;
             }

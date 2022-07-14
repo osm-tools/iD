@@ -234,8 +234,8 @@ export function svgVertices(projection, context) {
 
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.vertex.target-allowed')
-            .filter(function(d) { return filter(d.properties.entity); })
-            .data(data.targets, function key(d) { return d.id; });
+            .filter(function(d) { return filter(d?.properties?.entity); })
+            .data(data?.targets, function key(d) { return d?.id; });
 
         // exit
         targets.exit()
@@ -251,7 +251,14 @@ export function svgVertices(projection, context) {
             .merge(targets)
             .attr('class', function(d) {
                 const checkFootPoint = d?.properties?.entity?.tags['gedas:footpoint'] === 'yes';
-                return  `node vertex ${checkFootPoint ? 'vertex_yellow' : ''} target target-allowed ${targetClass} ${d.id}`;
+                const checkPrivatePoint = d?.properties?.entity?.tags['gedas:private'] === 'yes';
+                if (checkPrivatePoint && checkFootPoint === undefined ) {
+                    return `node point stroke-yellow target target-allowed ${targetClass} ${d.id}`;
+                } else if (checkPrivatePoint && checkFootPoint) {
+                    return `node vertex vertex_yellow target target-allowed ${targetClass} ${d.id}`;
+                } else {
+                    return `node vertex target target-allowed ${targetClass} ${d.id}`;
+                }
             })
             .attr('transform', getTransform);
 
