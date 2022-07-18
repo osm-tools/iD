@@ -4,7 +4,6 @@ import { osmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
-
 export function svgPoints(projection, context) {
      function markerPath(selection, klass) {
          selection
@@ -52,7 +51,6 @@ export function svgPoints(projection, context) {
                 geometry: node.asGeoJSON()
             });
         });
-
         var targets = selection.selectAll('.point.target')
             .filter(function(d) { return filter(d.properties.entity); })
             .data(data, function key(d) { return d.id; });

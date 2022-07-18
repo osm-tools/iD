@@ -78,6 +78,7 @@ export function svgVertices(projection, context) {
                     .each(function(entity) {
                         var i = z && getIcon(entity);
                         var r = rads[i ? 3 : z];
+
                         // slightly increase the size of unconnected endpoints #3775
                         if (entity.id !== activeID && entity.isEndpoint(graph) && !entity.isConnected(graph)) {
                             r += 1.5;
@@ -202,12 +203,12 @@ export function svgVertices(projection, context) {
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
         var data = { targets: [], nopes: [] };
+
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
 
             var vertexType = svgPassiveVertex(node, graph, activeID);
-              // passive or adjacent - allow to connect
-            if (vertexType !== 0) {   
+            if (vertexType !== 0) {     // passive or adjacent - allow to connect
                 data.targets.push({
                     type: 'Feature',
                     id: node.id,
@@ -235,10 +236,12 @@ export function svgVertices(projection, context) {
         var targets = selection.selectAll('.vertex.target-allowed')
             .filter(function(d) { return filter(d?.properties?.entity); })
             .data(data?.targets, function key(d) { return d?.id; });
-        // exit
+
+            // exit
         targets.exit()
             .remove();
-        // enter/update
+
+            // enter/update
         targets.enter()
             .append('circle')
             .attr('r', function(d) {
