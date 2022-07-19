@@ -25570,10 +25570,12 @@
             "name"
         ],
         "geometry": [
-            "point"
+            "point",
+            "vertex"
         ],
         "tags": {
-            "gedas:private": "yes"
+            "gedas:private": "*",
+            "gedas:rio_id":"*"
         },
         "searchable": true
 }}

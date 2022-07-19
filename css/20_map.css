@@ -207,7 +207,8 @@ path.line {
 /* privateLocationWay : [ if is is a way connection between footpoint and delivery point */
 path.line.private-location-way { 
     stroke: rgba(255, 204, 0, 1)!important; 
-    stroke-width: 12!important;  
+    stroke-width: 12!important;
+    stroke-dashoffset: 55%;  
     stroke-dasharray : 1,20 !important; 
     stroke-linecap : round !important;
     }

@@ -4291,9 +4291,14 @@ img.tile-debug {
 /* GEDAS-397 Visualize private street with red color in PSM editor*/
 /* private-red-way : is a private way with a red color */
 .private-red-way { stroke: rgba(212 , 5 , 17, 1)!important; stroke-width: 5!important;  }
-.vertex-yellow{fill: rgba(255, 204, 0, 1) !important; stroke: rgba(255, 204, 0, 1)!important;}
+.vertex-yellow{fill: rgba(255, 204, 0, 1) !important; stroke: #666!important;}
 .icon-private{ fill:  rgba(255, 204, 0, 1) !important; }
 .icon-private-editor{ color:  rgba(255, 204, 0, 1) !important; fill:  rgba(255, 204, 0, 0.75) !important; }
+.stroke[isDeliveryPoint="yes"]{
+    fill: rgb(255, 204, 0) !important;
+    stroke-width: 1;
+    stroke: #666 
+}
 
 .debug-legend {
     position: absolute;

@@ -117,7 +117,11 @@ export function svgVertices(projection, context) {
 
         enter
             .append('circle')
-            .attr('class', 'stroke');
+            .attr('isDeliveryPoint', function(d){
+                const isDeliveryPoint = d?.tags['gedas:rio_id'];
+                return  isDeliveryPoint?.length > 0 ? 'yes' : 'no';
+            })
+            .attr('class',  'stroke');
 
         // Vertices with tags get a fill.
         enter.filter(function(d) { return d.hasInterestingTags(); })
@@ -250,9 +254,10 @@ export function svgVertices(projection, context) {
             })
             .merge(targets)
             .attr('class', function(d) {
-                const checkFootPoint = d?.properties?.entity?.tags['gedas:footpoint'] === 'yes';
-                const checkPrivatePoint = d?.properties?.entity?.tags['gedas:private'] === 'yes';
-                    return `node vertex ${( checkPrivatePoint && checkFootPoint) ? 'vertex-yellow' : ''} target target-allowed ${targetClass} ${d.id}`;
+                const tags = d?.properties?.entity?.tags;
+                const checkFootPoint = tags['gedas:footpoint'] === 'yes';
+                const checkPrivatePoint = tags['gedas:private'] === 'yes';
+                    return `node vertex ${(checkFootPoint && checkPrivatePoint) ? 'vertex-yellow' : ''} target target-allowed ${targetClass} ${d.id}`;
             })
             .attr('transform', getTransform);
 
