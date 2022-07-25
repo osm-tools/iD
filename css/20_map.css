@@ -206,16 +206,16 @@ path.line {
 /* .ideditor path.line.stroke */
 /* privateLocationWay : [ if is is a way connection between footpoint and delivery point */
 path.line.private-location-way { 
-    stroke: rgba(255, 204, 0, 1)!important; 
-    stroke-width: 12!important;
-    stroke-dashoffset: 55%;  
+    stroke: rgba(255, 204, 0, .8)!important; 
+    stroke-width: 9!important;
+    stroke-dashoffset: 50%;  
     stroke-dasharray : 1,20 !important; 
     stroke-linecap : round !important;
     }
     /* else way by default ] */
 path.line.not-private-location-way{
-    stroke: #fff !important;
-    stroke-width: 5 !important;
+    stroke: rgb(255, 255, 255, .8) !important;
+    stroke-width: 2 !important;
 }
     path.line.stroke[stroke-path = "exist"] {
         stroke: #fff !important;
@@ -286,7 +286,7 @@ text.pointlabel {
 /* Safari 10 seems to have regressed too */
 .linelabel-halo .textpath,
 .linelabel .textpath {
-  baseline-shift: -33%;
+  baseline-shift: -48%;
   dominant-baseline: auto;
 }
 
